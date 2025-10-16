@@ -23,23 +23,40 @@ export default function Game() {
     function Materials() {
         
     }
-
-    function increment(){
-        console.log("Counting...");
+    
+    function increment(prop)
+    {
+        prop + 1;
+        console.log(prop);
     }
+
+    // function woodIncrement(){
+    //     woodCounter++;
+    //     console.log("adding wood...");
+    // }
+    // function rockIncrement(){
+    //     rockCounter++;
+    //     console.log("adding rock...");
+
+    // }
+    // function metalIncrement(){
+    //     metalCounter++;
+    //     console.log("adding metal...");
+
+    // }
 
     return (
         <>
           <h1>Game Testing</h1>
           
           <img src={Wood} alt="photo of wood" className = "materialimg"/>
-          <button onClick={increment}>Wood</button>
+          <button onClick={increment(woodCounter)}>Wood</button>
           <br></br><br></br>
           <img src={Rock} alt="photo of rock" className = "materialimg"/>
-          <button>Rock</button> 
+          <button onClick={increment(rockCounter)}>Rock</button> 
           <br></br><br></br>
           <img src={Metal} alt="photo of metal" className = "materialimg"/>
-          <button>Metal</button>
+          <button onClick={increment(metalCounter)}>Metal</button>
           <br></br><br></br>
 
 
