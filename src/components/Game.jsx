@@ -1,12 +1,18 @@
 // At least one number
 // At least one array
 // at least one object (current upgrade with name, cost, etc) (stats button)
+import React from "react";
+import Wood from "../images/wood.png"
+import Rock from "../images/rock.png"
+import Metal from "../images/metal.png"
 
-export default function Game() {
+export default function Game() { 
     let woodCounter = 0;
     let rockCounter = 0;
     let metalCounter = 0;
     let playerName = "beginner"
+    let [woodCounting, setWood] = React.useState("Yes");
+
 
     let totalCount = woodCounter + rockCounter + metalCounter;
     let resources = {woodCounter,rockCounter,metalCounter}
@@ -19,18 +25,20 @@ export default function Game() {
     }
 
     function increment(){
-        let [woodCounting, setWood] = React.useState("Yes");
-
+        console.log("Counting...");
     }
 
     return (
         <>
           <h1>Game Testing</h1>
           
+          <img src={Wood} alt="photo of wood" />
           <button onClick={increment}>Wood</button>
           <br></br><br></br>
+          <img src={Rock} alt="photo of rock" />
           <button>Rock</button>
           <br></br><br></br>
+          <img src={Metal} alt="photo of metal" />
           <button>Metal</button>
           <br></br><br></br>
 
