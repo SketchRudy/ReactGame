@@ -23,27 +23,26 @@ export default function Game() {
     function Materials() {
         
     }
+
+    function woodUpgrade(prop){     //if user has enough wood upgrade the wood pickaxe to rock
+        if(prop > 10){
+
+        }
+    }
+
+    function rockUpgrade(prop){     //if user has enough rock upgrade the metal pickaxe to rock
+        if(prop > 10){
+
+        }
+    }
+
+
     
-    function increment(prop)
-    {
+    function increment(prop){
         prop + 1;
         console.log(prop);
     }
 
-    // function woodIncrement(){
-    //     woodCounter++;
-    //     console.log("adding wood...");
-    // }
-    // function rockIncrement(){
-    //     rockCounter++;
-    //     console.log("adding rock...");
-
-    // }
-    // function metalIncrement(){
-    //     metalCounter++;
-    //     console.log("adding metal...");
-
-    // }
 
     return (
         <>
@@ -58,6 +57,10 @@ export default function Game() {
           <img src={Metal} alt="photo of metal" className = "materialimg"/>
           <button onClick={increment(metalCounter)}>Metal</button>
           <br></br><br></br>
+          <button onClick={increment(woodUpgrade)}>Upgrade to Rock?</button>
+          <button onClick={increment(rockUpgrade)}>Upgrade to metal?</button>
+
+
 
 
         </>
