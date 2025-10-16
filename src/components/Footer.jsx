@@ -4,5 +4,4 @@ export default function Footer() {
           <h1>Footer Testing</h1>
         </>
       )
-
 }
