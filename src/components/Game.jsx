@@ -7,10 +7,6 @@ import Rock from "../images/rock.png"
 import Metal from "../images/metal.png"
 
 export default function Game() { 
-
-    let mats = "wood"  
-
-
     const [woodCounter, setWoodCounter] = React.useState(0);
     const [rockCounter, setRockCounter] = React.useState(0);
     const [metalCounter, setMetalCounter] = React.useState(0);  
@@ -19,29 +15,22 @@ export default function Game() {
     const [pickAxe, setPickaxe] = React.useState({
         name: "wood",
         total: totalCount,
-        image: Wood
+        image: Wood,
+        items: [woodCounter, rockCounter, metalCounter]
     }) 
 
-
-    let items = [woodCounter, rockCounter, metalCounter];
-    let resources = {woodCounter,rockCounter,metalCounter}
-
-
-
-
-
-    function woodIncrement(){     //if user has enough wood upgrade the wood pickaxe to rock
+    function woodIncrement(){     //incrementing wood and keeping track of the old 
         setWoodCounter(prev => prev + 1);  
         console.log("Wood Counter " + woodCounter);
         console.log(pickAxe.name)
     }
 
-    function rockIncrement(){     //if user has enough wood upgrade the wood pickaxe to rock
+    function rockIncrement(){     //incrementing rock and keeping track of the old 
         setRockCounter(prev => prev + 1);  
         console.log(pickAxe.name)      
         console.log("Rock Counter " + rockCounter);
     }
-    function metalIncrement(){     //if user has enough wood upgrade the wood pickaxe to rock
+    function metalIncrement(){     //incrementing metal and keeping track of the old 
         setMetalCounter(prev => prev + 1);  
         console.log(pickAxe.name)      
         console.log("metal counter " + metalCounter);
@@ -49,8 +38,8 @@ export default function Game() {
     
 
 
-    
-    function woodUpgrade(){
+    //if the player has enough wood change the name and image of the "rock pickaxe"
+    function woodUpgrade(){     
         if(woodCounter > 10 || woodCounter == 10)
         {
             setPickaxe({
@@ -63,11 +52,14 @@ export default function Game() {
         else console.log("not enough");
     }
 
+    //if the player has enough rock change the name and image of the "metal pickaxe"
     function rockUpgrade(){
         if(rockCounter > 10 || rockCounter == 10)
             {
-                mats = "metal";
-                pickAxe.image = Metal
+                setPickaxe({
+                    name: "metal",
+                    image: Metal
+                })
                 console.log(pickAxe.name);
                 setWoodCounter(prev => prev - 10);
             }
@@ -103,7 +95,9 @@ export default function Game() {
           </div>
       
           <img src={pickAxe.image} alt="Current Pickaxe" className="materialimg" />
+          <p>{"Total Count: " + totalCount}</p>
         </div>
+        
       );
       
 }
