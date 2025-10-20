@@ -24,17 +24,20 @@ export default function Game() {
 
 
     function woodIncrement(){     //if user has enough wood upgrade the wood pickaxe to rock
-        setWoodCounter(woodCounter+1);
-        console.log(woodCounter);
+        setWoodCounter(prev => prev + 1);  
+        console.log(pickAxe.name)      
+        console.log("Wood Counter " + woodCounter);
     }
 
     function rockIncrement(){     //if user has enough wood upgrade the wood pickaxe to rock
-        setRockCounter(rockCounter+1);
-        console.log(rockCounter);
+        setRockCounter(prev => prev + 1);  
+        console.log(pickAxe.name)      
+        console.log("Rock Counter " + rockCounter);
     }
     function metalIncrement(){     //if user has enough wood upgrade the wood pickaxe to rock
-        setMetalCounter(metalCounter+1);
-        console.log(metalCounter);
+        setMetalCounter(prev => prev + 1);  
+        console.log(pickAxe.name)      
+        console.log("metal counter " + metalCounter);
     }
     
 
@@ -43,13 +46,23 @@ export default function Game() {
     function woodUpgrade(){
         if(woodCounter > 10 || woodCounter == 10)
         {
-            pickAxe.name = "rock";
+            mats = "rock";
             pickAxe.image = "../images/wood.png"
-            woodCounter = 0;
+            console.log(pickAxe.name);
+            setWoodCounter(prev => prev - 10);
         }
+        else console.log("not enough");
     }
+
     function rockUpgrade(){
-        console.log(prop);
+        if(rockCounter > 10 || rockCounter == 10)
+            {
+                mats = "metal";
+                pickAxe.image = "../images/metal.png"
+                console.log(pickAxe.name);
+                setWoodCounter(prev => prev - 10);
+            }
+            else console.log("not enough");
     }
 
 
