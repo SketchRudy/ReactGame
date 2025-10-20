@@ -1,7 +1,10 @@
 export default function Footer() {
     return (
         <>
-          <h1>Footer Testing</h1>
+        <div className="game-container">
+          <br></br><br></br><br></br>
+          <b>Created by Shawn and Rudolf</b>
+        </div>
         </>
       )
 }

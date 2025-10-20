@@ -1,7 +1,7 @@
 export default function Header() {
     return (
         <>
-          <h1>Header Testing</h1>
+          <h1 className="header">Resource Game</h1>
         </>
       )
 }
