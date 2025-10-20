@@ -21,10 +21,7 @@ export default function Game() {
     const pickAxe = {name:mats, total:totalCount};
 
 
-    function Materials(prop) {
-        setMaterial(prop + 1)
-        console.log(prop)
-    }
+
 
     function woodIncrement(){     //if user has enough wood upgrade the wood pickaxe to rock
         setWoodCounter(woodCounter+1);
@@ -53,13 +50,13 @@ export default function Game() {
           <h1>Game Testing</h1>
           
           <img src={Wood} alt="photo of wood" className = "materialimg"/>
-          <button onClick={() => woodIncrement}>Wood</button>
+          <button onClick={woodIncrement}>Wood</button>
           <br></br><br></br>
           <img src={Rock} alt="photo of rock" className = "materialimg"/>
-          <button onClick={() => Materials(rockCounter)}>Rock</button>
+          <button onClick={rockIncrement}>Rock</button>
           <br></br><br></br>
           <img src={Metal} alt="photo of metal" className = "materialimg"/>
-          <button onClick={() => Materials(metalCounter)}>Metal</button>
+          <button onClick={metalIncrement}>Metal</button>
           <br></br><br></br>
           {/*<button onClick={increment}>Upgrade to Rock?</button>
           <button onClick={increment}>Upgrade to metal?</button>*/}
