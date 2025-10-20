@@ -7,39 +7,43 @@ import Rock from "../images/rock.png"
 import Metal from "../images/metal.png"
 
 export default function Game() { 
-    let woodCounter = 0;
-    let rockCounter = 0;
-    let metalCounter = 0;
-    let playerName = "beginner"
-    let [woodCounting, setWood] = React.useState("Yes");
+
+    let mats = "wood"  
+    const [woodCounter, setWoodCounter] = React.useState(0);
+    const [rockCounter, setRockCounter] = React.useState(0);
+    const [metalCounter, setMetalCounter] = React.useState(0);  
 
 
+    let items = [woodCounter, rockCounter, metalCounter];
     let totalCount = woodCounter + rockCounter + metalCounter;
     let resources = {woodCounter,rockCounter,metalCounter}
 
-    const player = {name:playerName, total:totalCount};
+    const pickAxe = {name:mats, total:totalCount};
 
 
-    function Materials() {
-        
+    function Materials(prop) {
+        setMaterial(prop + 1)
+        console.log(prop)
     }
 
-    function woodUpgrade(prop){     //if user has enough wood upgrade the wood pickaxe to rock
-        if(prop > 10){
-
-        }
+    function woodIncrement(){     //if user has enough wood upgrade the wood pickaxe to rock
+        setWoodCounter(woodCounter+1);
+        console.log(woodCounter);
     }
 
-    function rockUpgrade(prop){     //if user has enough rock upgrade the metal pickaxe to rock
-        if(prop > 10){
-
-        }
+    function rockIncrement(){     //if user has enough wood upgrade the wood pickaxe to rock
+        setRockCounter(rockCounter+1);
+        console.log(rockCounter);
     }
+    function metalIncrement(){     //if user has enough wood upgrade the wood pickaxe to rock
+        setMetalCounter(metalCounter+1);
+        console.log(metalCounter);
+    }
+    
 
 
     
     function increment(prop){
-        prop + 1;
         console.log(prop);
     }
 
@@ -49,16 +53,20 @@ export default function Game() {
           <h1>Game Testing</h1>
           
           <img src={Wood} alt="photo of wood" className = "materialimg"/>
-          <button onClick={increment(woodCounter)}>Wood</button>
+          <button onClick={() => woodIncrement}>Wood</button>
           <br></br><br></br>
           <img src={Rock} alt="photo of rock" className = "materialimg"/>
-          <button onClick={increment(rockCounter)}>Rock</button> 
+          <button onClick={() => Materials(rockCounter)}>Rock</button>
           <br></br><br></br>
           <img src={Metal} alt="photo of metal" className = "materialimg"/>
-          <button onClick={increment(metalCounter)}>Metal</button>
+          <button onClick={() => Materials(metalCounter)}>Metal</button>
           <br></br><br></br>
-          <button onClick={increment(woodUpgrade)}>Upgrade to Rock?</button>
-          <button onClick={increment(rockUpgrade)}>Upgrade to metal?</button>
+          {/*<button onClick={increment}>Upgrade to Rock?</button>
+          <button onClick={increment}>Upgrade to metal?</button>*/}
+
+          <img src={Rock} alt="Upgradable" className = "materialimg"/>
+
+
 
 
 
