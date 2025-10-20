@@ -18,7 +18,7 @@ export default function Game() {
     let totalCount = woodCounter + rockCounter + metalCounter;
     let resources = {woodCounter,rockCounter,metalCounter}
 
-    const pickAxe = {name:mats, total:totalCount};
+    const pickAxe = {name:mats, total:totalCount, image:"../images/wood.png"};
 
 
 
@@ -40,7 +40,15 @@ export default function Game() {
 
 
     
-    function increment(prop){
+    function woodUpgrade(){
+        if(woodCounter > 10 || woodCounter == 10)
+        {
+            pickAxe.name = "rock";
+            pickAxe.image = "../images/wood.png"
+            woodCounter = 0;
+        }
+    }
+    function rockUpgrade(){
         console.log(prop);
     }
 
@@ -58,8 +66,8 @@ export default function Game() {
           <img src={Metal} alt="photo of metal" className = "materialimg"/>
           <button onClick={metalIncrement}>Metal</button>
           <br></br><br></br>
-          {/*<button onClick={increment}>Upgrade to Rock?</button>
-          <button onClick={increment}>Upgrade to metal?</button>*/}
+          <button onClick={woodUpgrade}>Upgrade to Rock?</button>
+          <button onClick={rockUpgrade}>Upgrade to metal?</button>
 
           <img src={Rock} alt="Upgradable" className = "materialimg"/>
 
