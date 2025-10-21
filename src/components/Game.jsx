@@ -10,13 +10,18 @@ export default function Game() {
     const [woodCounter, setWoodCounter] = React.useState(0);
     const [rockCounter, setRockCounter] = React.useState(0);
     const [metalCounter, setMetalCounter] = React.useState(0);  
-    let totalCount = woodCounter + rockCounter + metalCounter;
+    const [upgrades, setUpgrades] = React.useState([
+    { id: 'rock',  name: 'Rock Pickaxe',  cost: { wood: 10 },  bought: false },
+    { id: 'metal', name: 'Metal Pickaxe', cost: { rock: 10 },  bought: false }
+    ]);
+
+    const totalCount = woodCounter + rockCounter + metalCounter;
 
     const [pickAxe, setPickaxe] = React.useState({
         name: "wood",
-        total: totalCount,
+        // total: totalCount, 
         image: Wood,
-        items: [woodCounter, rockCounter, metalCounter]
+        // items: [woodCounter, rockCounter, metalCounter]
     }) 
 
     function woodIncrement(){     //incrementing wood and keeping track of the old 
@@ -40,31 +45,54 @@ export default function Game() {
 
     //if the player has enough wood change the name and image of the "rock pickaxe"
     function woodUpgrade(){     
-        if(woodCounter > 10 || woodCounter == 10)
+        const rockU = upgrades.find(u => u.id === 'rock') || { cost: { wood: 10 } };
+        if(canAfford(rockU.cost))
         {
-            setPickaxe({
-                name: "rock",
-                image: Rock
-            })
+            setPickaxe(prev => ({ ...prev, name: "rock", image: Rock }))
             console.log(pickAxe.name);
-            setWoodCounter(prev => prev - 10);
+            setWoodCounter(prev => prev - (rockU.cost.wood ?? 10));
+            markBought('rock');
         }
         else console.log("not enough");
     }
 
     //if the player has enough rock change the name and image of the "metal pickaxe"
     function rockUpgrade(){
-        if(rockCounter > 10 || rockCounter == 10)
+        const metalU = upgrades.find(u => u.id === 'metal') || { cost: { rock: 10 } };
+        if(canAfford(metalU.cost))
             {
-                setPickaxe({
-                    name: "metal",
-                    image: Metal
-                })
+                setPickaxe(prev => ({ ...prev, name: "metal", image: Metal }))
                 console.log(pickAxe.name);
-                setWoodCounter(prev => prev - 10);
+                setRockCounter(prev => prev - (metalU.cost.rock ?? 10));
+                markBought('metal');
             }
             else console.log("not enough");
     }
+
+    function canAfford(cost) {
+      return (!cost.wood  || woodCounter  >= cost.wood) &&
+              (!cost.rock  || rockCounter  >= cost.rock) &&
+              (!cost.metal || metalCounter >= cost.metal);
+      }
+
+    function markBought(id) {
+      setUpgrades(prev => prev.map(u => u.id === id ? { ...u, bought: true } : u));
+    }
+
+    const rockU  = upgrades.find(u => u.id === 'rock')  || { cost: { wood: 10 },  bought: false };
+    const metalU = upgrades.find(u => u.id === 'metal') || { cost: { rock: 10 }, bought: false };
+
+    const canBuyRock  = canAfford(rockU.cost);
+    const canBuyMetal = canAfford(metalU.cost);
+
+    const rockBought  = !!rockU.bought;
+    const metalBought = !!metalU.bought;
+
+    <ul>
+      {upgrades.map(u => (
+        <li key={u.id}>{u.name} — {u.bought ? 'Owned' : 'Locked'}</li>
+      ))}
+    </ul>
 
 
     return (
@@ -90,9 +118,17 @@ export default function Game() {
 
       
           <div className="upgrades">
-            <button onClick={woodUpgrade} className="upgradeBtn"><h4>Upgrade to Rock?</h4></button>
-            <button onClick={rockUpgrade} className="upgradeBtn"><h4>Upgrade to Metal?</h4></button>
-          </div>
+            {!rockBought && (
+            <button onClick={woodUpgrade} className="upgradeBtn" disabled = {!canBuyRock}>
+              <h4>Upgrade to Rock? ({woodCounter}/{rockU?.cost?.wood ?? 10})</h4>
+              </button>
+            )}
+            {rockBought && !metalBought && (
+            <button onClick={rockUpgrade} className="upgradeBtn" disabled={!canBuyMetal}>
+              <h4>Upgrade to Metal? ({rockCounter}/{metalU?.cost?.rock ?? 10})</h4>
+            </button>
+            )}
+        </div>
       
           <img src={pickAxe.image} alt="Current Pickaxe" className="materialimg" />
           <p>{"Total Count: " + totalCount}</p>
