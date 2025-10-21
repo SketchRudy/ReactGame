@@ -2,9 +2,10 @@
 // At least one array
 // at least one object (current upgrade with name, cost, etc) (stats button)
 import React from "react";
-import Wood from "../images/wood.png"
-import Rock from "../images/rock.png"
-import Metal from "../images/metal.png"
+import MaterialButton from "./MaterialButton";
+import Wood from "../images/wood.png";
+import Rock from "../images/rock.png";
+import Metal from "../images/metal.png";
 
 export default function Game() { 
     const [woodCounter, setWoodCounter] = React.useState(0);
@@ -26,19 +27,14 @@ export default function Game() {
 
     function woodIncrement(){     //incrementing wood and keeping track of the old 
         setWoodCounter(prev => prev + 1);  
-        console.log("Wood Counter " + woodCounter);
-        console.log(pickAxe.name)
     }
 
     function rockIncrement(){     //incrementing rock and keeping track of the old 
         setRockCounter(prev => prev + 1);  
         console.log(pickAxe.name)      
-        console.log("Rock Counter " + rockCounter);
     }
     function metalIncrement(){     //incrementing metal and keeping track of the old 
         setMetalCounter(prev => prev + 1);  
-        console.log(pickAxe.name)      
-        console.log("metal counter " + metalCounter);
     }
     
 
@@ -98,17 +94,12 @@ export default function Game() {
     return (
         <div className="game-container">
       
-          <div className="materials">
-            <button onClick={woodIncrement}>
-              <img src={Wood} alt="wood" className="materialimg" />
-            </button>
-            <button onClick={rockIncrement}>
-              <img src={Rock} alt="rock" className="materialimg" />
-            </button>
-            <button onClick={metalIncrement}>
-              <img src={Metal} alt="metal" className="materialimg" />
-            </button>
-          </div>
+      <div className="materials">
+        <MaterialButton material="Wood" image={Wood} onClick={woodIncrement} />
+        <MaterialButton material="Rock" image={Rock} onClick={rockIncrement} />
+        <MaterialButton material="Metal" image={Metal} onClick={metalIncrement} />
+      </div>
+
           <div className="materials">
             <p>{"Wood: " + woodCounter}</p>
             <p>{"Rock: " + rockCounter}</p>
@@ -125,11 +116,11 @@ export default function Game() {
             )}
             {rockBought && !metalBought && (
             <button onClick={rockUpgrade} className="upgradeBtn" disabled={!canBuyMetal}>
-              <h4>Upgrade to Metal? ({rockCounter}/{metalU?.cost?.rock ?? 10})</h4>
+              <h4> Upgrade to Metal? ({rockCounter}/{metalU?.cost?.rock ?? 10})</h4>
             </button>
             )}
-        </div>
-      
+          </div>
+            
           <img src={pickAxe.image} alt="Current Pickaxe" className="materialimg" />
           <p>{"Total Count: " + totalCount}</p>
         </div>
