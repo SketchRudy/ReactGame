@@ -26,22 +26,22 @@ export default function Game() {
     }) 
 
     function woodIncrement(){     //incrementing wood and keeping track of the old 
-        setWoodCounter(prev => prev + 1);  
+        setWoodCounter(prev => prev++   );  
     }
 
     function rockIncrement(){     //incrementing rock and keeping track of the old 
-        setRockCounter(prev => prev + 1);  
+        setRockCounter(prev => prev++);  
         console.log(pickAxe.name)      
     }
     function metalIncrement(){     //incrementing metal and keeping track of the old 
-        setMetalCounter(prev => prev + 1);  
+        setMetalCounter(prev => prev++);  
     }
     
 
 
     //if the player has enough wood change the name and image of the "rock pickaxe"
     function woodUpgrade(){     
-        const rockU = upgrades.find(u => u.id === 'rock') || { cost: { wood: 10 } };
+        const rockU = upgrades.find(u => u.id === 'rock') || { cost: { wood: 100 } };
         if(canAfford(rockU.cost))
         {
             setPickaxe(prev => ({ ...prev, name: "rock", image: Rock }))
@@ -75,7 +75,7 @@ export default function Game() {
       setUpgrades(prev => prev.map(u => u.id === id ? { ...u, bought: true } : u));
     }
 
-    const rockU  = upgrades.find(u => u.id === 'rock')  || { cost: { wood: 10 },  bought: false };
+    const rockU  = upgrades.find(u => u.id === 'rock')  && { cost: { wood: 10 },  bought: false };
     const metalU = upgrades.find(u => u.id === 'metal') || { cost: { rock: 10 }, bought: false };
 
     const canBuyRock  = canAfford(rockU.cost);
